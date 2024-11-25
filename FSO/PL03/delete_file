@@ -1,0 +1,13 @@
+#!/bin/bash
+# delete_file
+
+if test -s $@
+then
+    if test -f $@
+    then
+        *BORRAR*
+    else
+        echo Es un directorio, no se puede borrar
+    fi
+else
+    echo El fichero no existe
