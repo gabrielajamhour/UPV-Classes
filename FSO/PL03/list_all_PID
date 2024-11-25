@@ -1,0 +1,6 @@
+echo Lista de todos los procesos del sistema:
+for i in $(ls -d /proc/[1-9]*)
+do
+    pid=$(basename "$i")
+    echo $pid
+done
