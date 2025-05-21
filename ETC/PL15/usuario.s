@@ -1,6 +1,6 @@
 #-------------------------------------------------#
 #
-#  PR¡CTICA 15: LLAMADAS AL SISTEMA II
+#  PR√ÅCTICA 15: LLAMADAS AL SISTEMA II
 # 
 #-------------------------------------------------#
 
@@ -24,21 +24,21 @@
 retorn:		.word 0
 bondia:		.asciiz "MIMOS v."
 la_hora:		.asciiz " segundos\n"
-espero:		.asciiz "Espero un car·cter..."
-leido:		.asciiz "\nCar·cter leÌdo = "
+espero:		.asciiz "Espero un car√°cter..."
+leido:		.asciiz "\nCar√°cter le√≠do = "
 buffer_int: 	.ascii "          " # No tocar. Buffer de printf_integer
 
 #-------------------------------------------------#
 
-# Segmento de cÛdigo ("text")
+# Segmento de c√≥digo ("text")
 	.text
     	.globl main	
 
 main:
-# Guarda adreÁa de retorn
+# Guarda adre√ßa de retorn
 	sw $ra,retorn
 
-# Saluda y da el n˙mero de versiÛn
+# Saluda y da el n√∫mero de versi√≥n
 	la $a0,bondia
 	jal print_string
 	li $v0,get_version
@@ -48,7 +48,7 @@ main:
 	jal print_NL
 
 
-# Prueba de la funciÛn read_char 
+# Prueba de la funci√≥n read_char 
 
 	li $s0,0
 bucle:
@@ -60,14 +60,14 @@ bucle:
 	la $a0,la_hora
 	jal print_string
 
-	# Espera car·cter
+	# Espera car√°cter
 	la $a0,espero
 	jal print_string
 	li $v0,read_char
 	syscall
 	move $s1,$a0
 
-	# Informa de lo leÌdo
+	# Informa de lo le√≠do
 	la $a0,leido
 	jal print_string
 	move $a0,$s1
@@ -96,7 +96,7 @@ $L4:	jr $ra
 
 #-------------------------------------------------
 
-print_NL:	# sense par‡metres: escriu NL
+print_NL:	# sense par√†metres: escriu NL
 	li $a0,'\n'
 	li $v0,print_char 
 	syscall
@@ -110,9 +110,9 @@ printf_integer: # $a0: valor entero
 	       li $t2,10         		# divisor
 
 $L1:	# bucle de cambio de base
-	divu $t0,$t2		# divisiÛn entre 10
+	divu $t0,$t2		# divisi√≥n entre 10
 	mfhi $t3          		# tomo el resto
-	addiu $t3,$t3,'0' 		# calculo cÛdigo ascii
+	addiu $t3,$t3,'0' 		# calculo c√≥digo ascii
 	sb $t3,buffer_int($t1)	# guardo en buffer
 	addi $t1,$t1,1		# avanzo puntero
 	mflo $t0			# nou dividendo
@@ -120,8 +120,8 @@ $L1:	# bucle de cambio de base
 
 $L2:	# bucle de escritura
 	addiu $t1,$t1,-1		# retrocedo en buffer
-	lb $a0,buffer_int($t1)	# tomo car·cter
-	li $v0,print_char		# escribo car·cter
+	lb $a0,buffer_int($t1)	# tomo car√°cter
+	li $v0,print_char		# escribo car√°cter
 	syscall			# llamada
 	bne $t1,$zero,$L2	
 	li $v0,print_char 
