@@ -70,6 +70,8 @@ int2:
 
 	b retexc
 
+retexc:
+
     ## Restaura el contexto
 
 	.set noat
@@ -78,8 +80,6 @@ int2:
 	lw $t0, 4($k1)
 	lw $a0, 8($k1)
 	lw $v0, 12($k1)
-
-retexc:
 
     ## Restaura el modo usuario y vuelve al programa
 
